@@ -1,5 +1,6 @@
-import React,{useState,useContext, use} from "react";
-import usercontext from "../Context/UserContext.js";
+import React,{useState,useContext} from "react";
+import Usercontext from "../Context/UserContext.js";
+import UserContextProvider from "../Context/UserContextProvider.jsx";
 
 
 function Login(){
@@ -7,12 +8,12 @@ function Login(){
 const[username,setUsername]=useState("")
 const[password,setpassword]=useState("")
 
-const {setuser}=useContext(usercontext)
+const {setUser}=useContext(Usercontext)
 
 const handleSubmit=(e)=>{
 
     e.preventDefault()
-    setuser({username,password})
+    setUser({username,password})
 }
 
     return(
