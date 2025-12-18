@@ -41,7 +41,8 @@ export class AuthService {
       return; // user already logged in
     } catch {
       // No session → create one
-      return await this.account.createEmailSession(email, password);
+      // Appwrite SDK v21+ uses createEmailPasswordSession (createEmailSession was removed)
+      return await this.account.createEmailPasswordSession(email, password);
     }
   }
 
