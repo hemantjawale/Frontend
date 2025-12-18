@@ -6,6 +6,7 @@ import viteLogo from "/vite.svg";
 import "./App.css";
 import { current } from "@reduxjs/toolkit";
 import { login, logout } from "./store/authSlice.js";
+import Header from "./components/header/Header.jsx"
 
 function App() {
   const [loading, setLoading] = useState(true);
