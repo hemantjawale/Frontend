@@ -12,7 +12,7 @@ function Home() {
       }
     });
   }, []);
-  if (posts.length === 0) {
+  if (post.length === 0) {
     return (
       <div className="w-full min-h-screen bg-slate-900 flex flex-col justify-center items-center relative overflow-hidden">
         {/* Background Decor: Subtle Grid & Gradient Orbs */}

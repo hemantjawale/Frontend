@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Container from "../Container/Container.jsx";
 import Logo from "../Logo.jsx";
-
+import LogoutBtn from "./LogoutBtn.jsx"; // Adjust path if it's in a different folder
 
 function Header() {
   const authStatus = useSelector((state) => state.auth.status);

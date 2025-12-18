@@ -5,15 +5,17 @@ export class Service {
   client = new Client();
   databases;
   bucket;
+
   constructor() {
     this.client
       .setEndpoint(conf.appwriteUrl)
       .setProject(conf.appwriteProjectId);
+
     this.databases = new Databases(this.client);
     this.bucket = new Storage(this.client);
   }
 
-  async createPost({ title, slug, content, featuredImg, status, UserID }) {
+  async createPost({ title, slug, content, featuredImg, Status, UserID }) {
     try {
       return await this.databases.createDocument(
         conf.appwriteDatabaseId,
@@ -23,29 +25,30 @@ export class Service {
           title,
           content,
           featuredImg,
-          status,
+          Status,
           UserID,
         }
       );
     } catch (error) {
-      console.log(error);
+      console.error("Create Post Error:", error);
     }
   }
 
-  async updatePost(slug, { title, content, featuredImg, status, UserID }) {
+  async updatePost(slug, { title, content, featuredImg, Status }) {
     try {
       return await this.databases.updateDocument(
         conf.appwriteDatabaseId,
         conf.appwriteCollectionId,
+        slug,
         {
           title,
-          featuredImg,
           content,
-          status,
+          featuredImg,
+          Status,
         }
       );
     } catch (error) {
-      console.log(error);
+      console.error("Update Post Error:", error);
     }
   }
 
@@ -58,7 +61,8 @@ export class Service {
       );
       return true;
     } catch (error) {
-      console.log(error);
+      console.error("Delete Post Error:", error);
+      return false;
     }
   }
 
@@ -70,51 +74,56 @@ export class Service {
         slug
       );
     } catch (error) {
-      console.log(error);
+      console.error("Get Post Error:", error);
     }
   }
 
-  async getPosts(queries = [Query.equal("status", "active")]) {
+  async getPosts() {
     try {
       return await this.databases.listDocuments(
         conf.appwriteDatabaseId,
         conf.appwriteCollectionId,
-        queries,
-        100,
-        0
+        [
+          Query.equal("Status", "active"),
+          Query.limit(100),
+        ]
       );
     } catch (error) {
-      console.log(error);
+      console.error("Get Posts Error:", error);
     }
   }
 
-  // file upload
+  // 📁 File Upload
 
   async uploadFile(file) {
     try {
-      return this.await.bucket.createFile(
+      return await this.bucket.createFile(
         conf.appwriteBucketId,
         ID.unique(),
         file
       );
     } catch (error) {
-      console.log(error);
+      console.error("Upload File Error:", error);
     }
   }
 
   async deleteFile(fileId) {
     try {
       await this.bucket.deleteFile(conf.appwriteBucketId, fileId);
+      return true;
     } catch (error) {
-      console.log(error);
+      console.error("Delete File Error:", error);
+      return false;
     }
   }
 
-  async getFilePreview(fileId) {
-    return (
-      await this.bucket, this.getFilePreview(conf.appwriteBucketId, fileId)
+  getFilePreview(fileId) {
+    return this.bucket.getFilePreview(
+      conf.appwriteBucketId,
+      fileId
     );
   }
 }
-const service = new Service()
-export default service
+
+const service = new Service();
+export default service;
