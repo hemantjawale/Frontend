@@ -62,7 +62,7 @@ function Home() {
 
         {/* Responsive Post Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {posts.map((post) => (
+          {post.map((post) => (
             <div
               key={post.$id}
               className="transform transition duration-300 hover:-translate-y-2"

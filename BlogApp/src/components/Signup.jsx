@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import login  from "../store/authSlice.js";
+import {login}  from "../store/authSlice.js";
 import Button from "./Button.jsx";
 import Input from "./Input.jsx";
 import Logo from "./Logo.jsx";
@@ -19,8 +19,8 @@ function SignUp() {
     try {
       const userData = await authService.createAccount(data);
       if (userData) {
-        const userData = await authService.getCurrentUser();
-        if (userData) dispatch(login(userData));
+        const currentUser = await authService.getCurrentUser();
+        if (currentUser) dispatch(login(currentUser));
         navigate("/");
       }
     } catch (error) {
@@ -97,4 +97,4 @@ function SignUp() {
   );
 }
 
-export { SignUp as Signup };
+export default SignUp;
