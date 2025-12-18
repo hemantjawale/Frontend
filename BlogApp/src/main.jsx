@@ -7,8 +7,9 @@ import store from "./store/store.js";
 import ReactDOM from "react-dom/client";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Home from "./Pages/Home.jsx";
-import { AuthLayout } from "./components/AuthLayout.jsx";
-import { login } from "./store/authSlice.js";
+import AuthLayout  from "./components/AuthLayout.jsx";
+import login from "./store/authSlice.js";
+import Login from "./Pages/Login.jsx"
 import AddPost from "./Pages/AddPost.jsx";
 import Signup from "./Pages/Signup.jsx";
 import EditPost from "./Pages/EditPost.jsx";

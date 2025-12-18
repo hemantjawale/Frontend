@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { login } from "../store/authSlice.js";
+import login  from "../store/authSlice.js";
 import Button from "./Button.jsx";
 import Input from "./Input.jsx";
 import Logo from "./Logo.jsx";
@@ -97,4 +97,4 @@ function SignUp() {
   );
 }
 
-export default SignUp;
+export { SignUp as Signup };
