@@ -14,11 +14,11 @@ const Input = React.forwardRef(function Input({ label, type = "text", className 
       )}
       <input
         type={type}
-        className={`w-full px-4 py-3 rounded-lg bg-gray-50 text-gray-900 
+        className={`w-full px-4 py-3 rounded-lg 
             border border-gray-300 
             focus:bg-white focus:border-blue-500 focus:ring-4 focus:ring-blue-500/30
             outline-none transition-all duration-200 ease-in-out
-            placeholder:text-gray-400
+            placeholder:text-gray-400 text-gray-900 focus:text-black
             ${className}`}
         ref={ref}
         {...props}

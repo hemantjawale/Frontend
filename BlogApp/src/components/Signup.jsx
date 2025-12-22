@@ -59,6 +59,7 @@ function SignUp() {
             <Input
               label="Full Name: "
               placeholder="Enter your full name"
+              className="bg-slate-900 border-slate-700 text-white focus:text-black focus:border-indigo-500 focus:ring-indigo-500/50"
               {...register("name", {
                 required: true,
               })}
@@ -67,6 +68,7 @@ function SignUp() {
               label="Email: "
               placeholder="Enter your email"
               type="email"
+              className="bg-slate-900 border-slate-700 text-white focus:text-black focus:border-indigo-500 focus:ring-indigo-500/50"
               {...register("email", {
                 required: true,
                 validate: {
@@ -80,6 +82,7 @@ function SignUp() {
               label="Password: "
               type="password"
               placeholder="Enter your password"
+              className="bg-slate-900 border-slate-700 text-white focus:text-black focus:border-indigo-500 focus:ring-indigo-500/50"
               {...register("password", {
                 required: true,
               })}

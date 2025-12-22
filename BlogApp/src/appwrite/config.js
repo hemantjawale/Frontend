@@ -15,42 +15,44 @@ export class Service {
     this.bucket = new Storage(this.client);
   }
 
-  async createPost({ title, slug, content, featuredImg, Status, UserID }) {
-    try {
-      return await this.databases.createDocument(
-        conf.appwriteDatabaseId,
-        conf.appwriteCollectionId,
-        slug,
-        {
-          title,
-          content,
-          featuredImg,
-          Status,
-          UserID,
-        }
-      );
-    } catch (error) {
-      console.error("Create Post Error:", error);
-    }
+  async createPost({ title, slug, content, featuredImage, status, userId }) {
+  try {
+    return await this.databases.createDocument(
+      conf.appwriteDatabaseId,
+      conf.appwriteCollectionId,
+      slug,
+      {
+         title,                     // ✅ lowercase
+        content,                   // ✅ correct
+        featuredImage, // ✅ correct name
+        Status: status,            // ✅ exact case
+        UserID: userId,        // must match Appwrite
+      }
+    );
+  } catch (error) {
+    console.error("Create Post Error:", error);
   }
+}
 
-  async updatePost(slug, { title, content, featuredImg, Status }) {
-    try {
-      return await this.databases.updateDocument(
-        conf.appwriteDatabaseId,
-        conf.appwriteCollectionId,
-        slug,
-        {
-          title,
-          content,
-          featuredImg,
-          Status,
-        }
-      );
-    } catch (error) {
-      console.error("Update Post Error:", error);
-    }
+
+ async updatePost(slug, { title, content, featuredImage, status }) {
+  try {
+    return await this.databases.updateDocument(
+      conf.appwriteDatabaseId,
+      conf.appwriteCollectionId,
+      slug,
+      {
+        title,
+        content,
+        featuredImage,
+        Status: status,
+      }
+    );
+  } catch (error) {
+    console.error("Update Post Error:", error);
   }
+}
+
 
   async deletePost(slug) {
     try {
@@ -117,12 +119,13 @@ export class Service {
     }
   }
 
-  getFilePreview(fileId) {
-    return this.bucket.getFilePreview(
-      conf.appwriteBucketId,
-      fileId
-    );
-  }
+getFilePreview(fileId) {
+  if (!fileId) return null;
+  return this.bucket
+    .getFileView(conf.appwriteBucketId, fileId)
+    .toString();
+}
+
 }
 
 const service = new Service();

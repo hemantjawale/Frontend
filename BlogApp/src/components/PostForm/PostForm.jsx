@@ -97,14 +97,14 @@ export default function PostForm({ post }) {
           <Input
             label="Title"
             placeholder="Give your post a catchy title..."
-            className="mb-6 bg-slate-900 border-slate-700 text-white focus:border-indigo-500 focus:ring-indigo-500/50"
+            className="mb-6 bg-slate-900 border-slate-700 text-white focus:text-black focus:border-indigo-500 focus:ring-indigo-500/50"
             {...register("title", { required: true })}
           />
 
           <Input
             label="Slug (URL)"
             placeholder="my-awesome-post"
-            className="mb-6 bg-slate-900 border-slate-700 text-slate-300 font-mono text-sm focus:border-indigo-500"
+            className="mb-6 bg-slate-900 border-slate-700 text-white focus:text-black font-mono text-sm focus:border-indigo-500"
             {...register("slug", { required: true })}
             onInput={(e) => {
               setValue("slug", slugTransform(e.currentTarget.value), {
@@ -159,7 +159,7 @@ export default function PostForm({ post }) {
             <Select
               options={["active", "inactive"]}
               label="Status"
-              className="mb-4 bg-slate-900 border-slate-700 text-white focus:border-indigo-500"
+              className="mb-4 bg-slate-900 border-slate-700 text-white focus:text-black focus:border-indigo-500"
               {...register("status", { required: true })}
             />
           </div>
